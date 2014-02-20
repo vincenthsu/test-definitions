@@ -1,0 +1,54 @@
+metadata:
+    format: Lava-Test Test Definition 1.0
+    name: lca-demo-bridge
+    description: "LCA demo generator part"
+    maintainer:
+        - vincent.hsu@linaro.org
+    os:
+        - ubuntu
+    scope:
+        - functional
+    devices:
+        - kvm
+        - panda
+        - panda-es
+        - arndale
+        - vexpress-a9
+        - vexpress-tc2
+
+install:
+    steps:
+        - 'git clone git://git.linaro.org/people/weilong.chen/gen.git'
+        - 'cd gen'
+        - 'make'
+        - 'cd ..'
+    deps:
+        - flex
+        - bison
+        - git
+        - build-essential
+
+run:
+    steps:
+        - 'lava-network broadcast eth0'
+        - 'lava-network collect eth0'
+        - 'ifconfig eth1 192.168.0.1'
+        - 'arp -s 192.168.1.2 38:ea:a7:93:8c:28'
+        - 'arp -s 192.168.1.4 02:8e:8f:32:21:98'
+        - 'route add -net 192.168.0.0 netmask 255.255.0.0 dev eth1'
+        - 'cd gen/test/generator'
+        - './odp_generator -i eth1 -a 017:42:96:6d:70 -b 02:f7:0c:56:2c:84 -c 10.10.10.103 -d 10.10.10.102 | tee ~/test.log &'
+        - 'TPID=$(pidof odp_generator)'
+        - 'ifconfig -a'
+        - 'route'
+        - 'lava-sync ready'
+        - 'sleep 600'
+        - 'kill -9 $TPID'
+        - 'cat ~/test.log'
+        - 'lava-sync done'
+
+parse:
+    pattern: "^(?P<test_case_id>[a-zA-Z0-9_-]+):\\s(?P<result>\\w+)"
+    fixupdict:
+        PASS: pass
+        FAIL: fail
