@@ -8,7 +8,7 @@ KEYSTONE_MAC=$3
 ARNDALE_MAC=$4
 
 cd ~
-git clone git://git.linaro.org/people/vincent.hsu/odp-demo.git
+git clone git://git.linaro.org/people/vincent.hsu/odp-demo.git -b keystone
 cd odp-demo
 make
 ls -al
