@@ -13,6 +13,7 @@ cd odp-demo
 make
 ls -al
 
+ifconfig $TEST_INTERFACE hw ether $ARNDALE_MAC
 ifconfig up $TEST_INTERFACE
 ifconfig $TEST_INTERFACE 10.10.10.102
 arp -s 10.10.10.101 $KEYSTONE_MAC
@@ -28,7 +29,6 @@ cd test/packet
 #PPID=$(pidof odp_packet)
 #sleep $TEST_TIME
 #kill -9 $PPID
-
 
 echo "test_case_id:odp_loopback result:success"
 
