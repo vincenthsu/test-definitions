@@ -22,7 +22,7 @@ params:
     TEST_TIME: "630"
     TEST_INTERFACE: "eth1"
     KEYSTONE_MAC: "c4:ed:ba:99:f4:0a"
-    ARNDALE_MAC: "11:22:33:33:22:11"
+    ARNDALE_MAC: "78:78:78:87:87:87"
 
 install:
     deps:

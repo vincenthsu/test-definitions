@@ -13,11 +13,12 @@ cd odp-demo
 make
 ls -al
 
+ifconfig down $TEST_INTERFACE
 ifconfig $TEST_INTERFACE hw ether $ARNDALE_MAC
+ifconfig $TEST_INTERFACE 172.16.0.102
 ifconfig up $TEST_INTERFACE
-ifconfig $TEST_INTERFACE 10.10.10.102
-arp -s 10.10.10.101 $KEYSTONE_MAC
-route add -net 10.10.10.0 netmask 255.255.255.0 dev eth1
+arp -s 172.16.0.101 $KEYSTONE_MAC
+route add -net 172.16.0.0 netmask 255.255.0.0 dev $TEST_INTERFACE
 
 ifconfig -a
 arp -a
