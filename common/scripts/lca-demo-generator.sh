@@ -7,10 +7,7 @@ TEST_INTERFACE=$2
 KEYSTONE_MAC=$3
 ARNDALE_MAC=$4
 
-cd ~
-git clone git://git.linaro.org/people/vincent.hsu/odp-demo.git -b keystone
-cd odp-demo
-make
+cd ~/odp-demo
 ls -al
 
 ifconfig down $TEST_INTERFACE
@@ -25,9 +22,9 @@ arp -a
 route
 
 cd test/generator
-sh ./odp_generator -i $TEST_INTERFACE -a $KEYSTONE_MAC -b $ARNDALE_MAC -c 172.16.0.101 -d 172.16.0.102 | tee ~/gen.log &
+./odp_generator -i $TEST_INTERFACE -a $KEYSTONE_MAC -b $ARNDALE_MAC -c 172.16.0.101 -d 172.16.0.102 | tee ~/gen.log &
 cd ../receiver
-sh ./odp_receiver -i $TEST_INTERFACE -m 1 | tee ~/recv.log &
+./odp_receiver -i $TEST_INTERFACE -m 1 | tee ~/recv.log &
 
 GPID=$(pidof odp_generator)
 RPID=$(pidof odp_receiver)
