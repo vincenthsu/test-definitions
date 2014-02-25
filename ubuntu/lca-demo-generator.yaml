@@ -38,6 +38,8 @@ run:
         - "ifconfig -a"
         - "arp -a"
         - "route"
+        - "cd ~ ; git clone git://git.linaro.org/people/vincent.hsu/odp-demo.git -b keystone"
+        - "cd ~/odp-demo ; make"
         - "lava-sync ready"
         - "lava-test-case multinode-lava-network --shell ./common/scripts/lca-demo-generator.sh $TEST_TIME $TEST_INTERFACE $KEYSTONE_MAC $ARNDALE_MAC"
         - "lava-sync done"
