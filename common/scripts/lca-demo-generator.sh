@@ -14,6 +14,7 @@ make
 ls -al
 
 ifconfig down $TEST_INTERFACE
+ifconfig $TEST_INTERFACE hw ether $KEYSTONE_MAC
 ifconfig $TEST_INTERFACE 172.16.0.101
 ifconfig up $TEST_INTERFACE
 arp -s 172.16.0.102 $ARNDALE_MAC
