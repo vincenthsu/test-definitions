@@ -39,7 +39,7 @@ run:
         - "arp -a"
         - "route"
         - "CUR_PATH=$PWD"
-        - "cd ~ ; git clone git://git.linaro.org/people/vincent.hsu/odp-demo.git -b keystone"
+        - "cd ~ ; git clone git://git.linaro.org/people/vincent.hsu/odp-demo.git -b generator"
         - "cd ~/odp-demo ; make"
         - "cd $CUR_PATH"
         - "lava-sync ready"
