@@ -13,6 +13,7 @@ cd odp-demo
 make
 ls -al
 
+echo "set ip for binding mac"
 ifconfig down $TEST_INTERFACE
 ifconfig $TEST_INTERFACE hw ether $ARNDALE_MAC
 ifconfig $TEST_INTERFACE 172.16.0.102
@@ -23,6 +24,10 @@ route add -net 172.16.0.0 netmask 255.255.0.0 dev $TEST_INTERFACE
 ifconfig -a
 arp -a
 route
+
+echo "unset the ip address"
+ifconfig $TEST_INTERFACE 0.0.0.0
+ifconfig -a
 
 cd test/packet
 ./odp_packet -i $TEST_INTERFACE -m 1 &
