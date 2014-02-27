@@ -25,9 +25,9 @@ arp -a
 route
 
 cd test/generator
-./odp_generator -i $TEST_INTERFACE -a $KEYSTONE_MAC -b $ARNDALE_MAC -c 172.16.0.101 -d 172.16.0.102 | tee ~/gen.log &
+./odp_generator -i $TEST_INTERFACE -a $KEYSTONE_MAC -b $ARNDALE_MAC -c 172.16.0.101 -d 172.16.0.102 &
 cd ../receiver
-./odp_receiver -i $TEST_INTERFACE -m 1 | tee ~/recv.log &
+./odp_receiver -i $TEST_INTERFACE -m 1 &
 
 GPID=$(pidof odp_generator)
 RPID=$(pidof odp_receiver)
