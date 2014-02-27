@@ -26,7 +26,10 @@ arp -a
 route
 
 echo "unset the ip address"
+ifconfig down $TEST_INTERFACE
 ifconfig $TEST_INTERFACE 0.0.0.0
+sleep 10
+ifconfig up $TEST_INTERFACE
 ifconfig -a
 
 cd test/packet
