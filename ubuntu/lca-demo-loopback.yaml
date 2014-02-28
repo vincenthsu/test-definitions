@@ -36,8 +36,6 @@ run:
         - "lava-network broadcast eth0"
         - "lava-network collect eth0"
         - "ifconfig -a"
-        - "arp -a"
-        - "route"
         - "lava-test-case multinode-lava-network --shell ./common/scripts/lca-demo-loopback.sh $TEST_TIME $TEST_INTERFACE $KEYSTONE_MAC $ARNDALE_MAC"
         - "lava-sync ready"
         - "lava-sync done"

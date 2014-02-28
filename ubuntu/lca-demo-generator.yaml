@@ -5,7 +5,7 @@ metadata:
     maintainer:
         - vincent.hsu@linaro.org
     os:
-        - ubuntu
+        - openembedded
     scope:
         - functional
     devices:
@@ -24,20 +24,11 @@ params:
     KEYSTONE_MAC: "c4:ed:ba:99:f4:0a"
     ARNDALE_MAC: "78:78:78:87:87:87"
 
-install:
-    deps:
-        - flex
-        - bison
-        - git
-        - build-essential
-
 run:
     steps:
         - "lava-network broadcast eth0"
         - "lava-network collect eth0"
         - "ifconfig -a"
-        - "arp -a"
-        - "route"
         - "lava-sync ready"
         - "lava-test-case multinode-lava-network --shell ./common/scripts/lca-demo-generator.sh $TEST_TIME $TEST_INTERFACE $KEYSTONE_MAC $ARNDALE_MAC"
         - "lava-sync done"
